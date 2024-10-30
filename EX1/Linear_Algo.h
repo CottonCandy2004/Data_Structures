@@ -59,7 +59,7 @@ void Books_Sort(books* head, books* tail, bool is_greated)
 
 int Linear_sort(lines* line)
 {
-    Books_Sort((line->data)[0], (line->data)[(line->n)]);
+    Books_Sort(&(line->data)[0], &(line->data)[(line->n)], false);
     return 0;
 }
 #endif
