@@ -4,7 +4,7 @@ typedef struct book
 {
     char ISBN[20];
     char name[100];
-    int price;
+    double price;
 } books;
 
 typedef struct line
