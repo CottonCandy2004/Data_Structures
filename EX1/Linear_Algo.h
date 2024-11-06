@@ -6,10 +6,11 @@
 search_results* Linear_Search(lines* line, char* search)
 {
     search_results* results = new search_results;
+    results->results_num = 0;
     lines* buff = Linear_Create(1);
     for(int i = 0; i < (line->n); i++)
     {
-        if(strstr((line->data)[i].ISBN, search) || strstr((line->data)[i].name, search))
+        if(strstr((line->data)[i].ISBN, search) != NULL || strstr((line->data)[i].name, search) != NULL)
         {
             Linear_Pushback(buff, (line->data)[i]);
             (results->results_num)++;
@@ -22,16 +23,29 @@ search_results* Linear_Search(lines* line, char* search)
     }
     results->result = resultdata;
     Linear_Destroy(buff);
-    return 0;
+    return results;
+}
+
+int Linear_Locate(lines* line, char* isbn)
+{
+    for(int i = 0; i < (line->n); i++)
+    {
+        if(strstr((line->data)[i].ISBN, isbn) != NULL)
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 void Books_Sort(books* head, books* tail, bool is_greated)
 {
     if(head>=tail) return;
     books *p,*q=head+1;
-    for(p=head+1;p!=tail+1;p++)
+    for(p=head+1;p!=tail;p++)
     {
         if (is_greated)
+        {
             if(p->price > head->price)
             {
                 book temp=*p;
@@ -39,7 +53,9 @@ void Books_Sort(books* head, books* tail, bool is_greated)
                 *q=temp;
                 q++;
             }
+        }
         else
+        {
             if(p->price < head->price)
             {
                 book temp=*p;
@@ -47,6 +63,7 @@ void Books_Sort(books* head, books* tail, bool is_greated)
                 *q=temp;
                 q++;
             }
+        }
     }
     q--;
     books temp=*head;
@@ -59,7 +76,7 @@ void Books_Sort(books* head, books* tail, bool is_greated)
 
 int Linear_sort(lines* line)
 {
-    Books_Sort(&(line->data)[0], &(line->data)[(line->n)], false);
+    Books_Sort(&((line->data)[0]), &((line->data)[(line->n)]), false);
     return 0;
 }
 #endif

@@ -33,13 +33,21 @@ int Linear_Pushback(lines* line, book data)
 
 int Linear_pop(lines* line, unsigned long long id)
 {
-    if(id < (line->n))
+    if(id > (line->n) || id < 0)
         return -1;
-    for (int i = id; i < (line->n); i++)
+    for (int i = id + 1; i < (line->n); i++)
     {
-        (line->data)[i -1] = (line->data)[i];
+        (line->data)[i-1] = (line->data)[i];
     }
     (line->n)--;
+    return 0;
+}
+
+int Linear_change(lines* line, unsigned long long id, double price)
+{
+    if(id > (line->n))
+        return -1;
+    line->data[id].price = price;
     return 0;
 }
 
@@ -49,6 +57,14 @@ int Linear_Destroy(lines* line)
     delete(line);
     return 0;
 }
+
+int Results_Destroy(search_results* line)
+{
+    delete[](line->result);
+    delete(line);
+    return 0;
+}
+
 
 int Linear_Change(lines* line, unsigned long long id, book change_data)
 {
