@@ -5,58 +5,50 @@
 
 bool is_ok(std::string a)
 {
-    struct stack* st = stack_create();
+    struct stack st;
     for(auto &i : a)
     {
         if(i == '(')
         {
-            stack_push(st, '(');
+            st.push('(');
         }
         if(i == ')')
         {
-            if(!stack_empty(st))
+            if(!st.empty())
             {
-                stack_pop(st);
+                st.pop();
             }
             else
             {
-                stack_destroy(st);
                 return false;
             }
         }
     }
-    if(stack_empty(st))
-        {stack_destroy(st); return true;}
-    else
-        {stack_destroy(st); return false;}
+    return st.empty() ? true : false;
 }
 
 bool is_ok_st(std::string a)
 {
-    struct stack* st = stack_create();
+    struct stack st;
     std::string c;
     bool flag = false;
     for(auto &i : a)
     {
         if (i == '@')
             {flag = true; break;}
-        stack_push(st, i);
+        st.push(i);
         c.push_back(i);
     }
     if(!flag)
         throw("Not end with '@'!");
     std::string b;
-    while(!stack_empty(st))
+    while(!st.empty())
     {
-        char buff = stack_top(st);
+        char buff = st.top();
         b.push_back(buff);
-        stack_pop(st);
+        st.pop();
     }
-    stack_destroy(st);
-    if(c == b)
-        {return true;}
-    else
-        {return false;}
+    return c == b ? true : false;
 }
 int main()
 {
