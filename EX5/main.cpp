@@ -25,9 +25,9 @@ int main() {
     G.CreateEdge(4, 6);
     G.CreateEdge(6, 7);
     G.CreateEdge(8, 7);
-
+    printf("\nDFS Results: ");
     G.DFS();
-
+    printf("\nBFS Results: ");
     G.BFS();
 
     printf("\n");

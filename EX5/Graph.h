@@ -51,7 +51,6 @@ typedef struct Graph {
 
     void DFS() {
         bool* visited = new bool[this->numVertices]();
-        printf("\nDFS Results: ");
 
         DFS_Recursive(this, 0, visited);
 
@@ -68,7 +67,6 @@ typedef struct Graph {
         int* queue = new int[this->numVertices];
         int front = 0, rear = 0;
 
-        printf("\nBFS Results: ");
         queue[rear++] = 0;
         visited[0] = true;
 
