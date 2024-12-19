@@ -1,0 +1,24 @@
+@startuml EX5
+start
+:初始化 visited 数组;
+:调用 DFS 和 BFS 函数;
+
+partition DFS {
+    :初始化栈或递归开始;
+    :对未访问的顶点调用递归;
+    while (存在未访问邻接点?) is (是)
+        :访问邻接点并递归;
+    endwhile (否)
+}
+
+partition BFS {
+    :初始化队列;
+    while (队列非空?) is (是)
+        :出队顶点;
+        :访问其邻接点并入队;
+    endwhile (否)
+    :检查其他未访问顶点;
+}
+
+stop
+@enduml

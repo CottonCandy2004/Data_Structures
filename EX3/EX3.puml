@@ -1,0 +1,48 @@
+@startuml EX3
+start
+
+:输入字符串 a;
+if (任务为括号配对?) then (yes)
+    :初始化栈 st;
+    while (遍历字符串 a 中的每个字符)
+        if (字符为 '(') then (yes)
+            :压入栈 st;
+        elseif (字符为 ')') then (yes)
+            if (栈为空?) then (yes)
+                :返回 False;
+                stop
+            else (no)
+                :弹出栈顶元素;
+            endif
+        endif
+    endwhile
+    if (栈为空?) then (yes)
+        :返回 True;
+    else (no)
+        :返回 False;
+    endif
+else (no)
+    :初始化栈 st, 字符串 c;
+    while (遍历字符串 a)
+        if (字符为 '@') then (yes)
+            :flag = True, 跳出循环;
+        else (no)
+            :压入栈 st, 追加字符到 c;
+        endif
+    endwhile
+    if (flag 为 False?) then (yes)
+        :抛出异常;
+        stop
+    endif
+    :初始化空字符串 b;
+    while (栈不为空)
+        :弹出栈顶元素, 追加到 b;
+    endwhile
+    if (c == b?) then (yes)
+        :返回 True;
+    else (no)
+        :返回 False;
+    endif
+endif
+stop
+@enduml
